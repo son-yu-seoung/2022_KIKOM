@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_weight="2"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
+            android:layout_weight="2">
+
+            <Button
+                android:id="@+id/tw_go_board_page_btn"
+                android:layout_width="100dip"
+                android:layout_height="40dip"
+                android:backgroundTint="@color/black"
+                android:text="돌아가기!"
+                android:textColor="@color/white"
+                tools:ignore="MissingConstraints"
+                android:layout_weight="2">
+            </Button>
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/BoardtextView"
+                android:layout_width="233dp"
+                android:layout_height="50dp"
+                android:layout_weight="5"
+                android:layout_gravity="center"
+                android:text="게시판"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:background="@drawable/textview_stroke"
+                app:layout_constraintBottom_toTopOf="@+id/BoardView"
+                app:layout_constraintEnd_toStartOf="@+id/Boardspinner"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="MissingConstraints"
+                />
+
+            <Spinner
+                android:id="@+id/Boardspinner"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:layout_marginBottom="17dp"
+                app:layout_constraintBottom_toTopOf="@+id/BoardView"
+                app:layout_constraintEnd_toStartOf="@+id/button"
+                app:layout_constraintStart_toEndOf="@+id/BoardtextView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="80dip"
+                android:layout_height="55dip"
+                android:backgroundTint="@color/black"
+                android:text="글쓰기"
+                android:textColor="@color/white"
+                tools:ignore="MissingConstraints"
+                android:layout_weight="2">
+            </Button>
+
+            <TextView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/BoardView"
+            android:layout_width="match_parent"
+            android:layout_height="650dip"
+            android:layout_weight="8"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="81dp"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
