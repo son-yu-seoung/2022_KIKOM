@@ -1,4 +1,8 @@
+package com.example.app;
+
 import android.content.Context;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -31,7 +35,7 @@ public class Adapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((LinearLayout) object);
+        return view == ((ConstraintLayout) object);
     }
 
     @Override

@@ -5,6 +5,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
+import com.example.app.Adapter;
+
 public class MainActivity extends AppCompatActivity {
 
     Adapter adapter;
