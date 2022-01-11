@@ -62,4 +62,4 @@ while True:
 
     else: # except
         print('잘못된 입력을 하셨습니다.\n')
-        continue
+        continue 
