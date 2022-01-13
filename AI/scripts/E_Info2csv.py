@@ -29,7 +29,6 @@ while True:
     if select == 0: # data check
         print('\n==================== 데이터 확인 ====================\n')
         
-
         while True:
             select = int(input('0. 데이터 전체 확인, 1. 검색해서 하나만 확인, 2. 종료'))
             
