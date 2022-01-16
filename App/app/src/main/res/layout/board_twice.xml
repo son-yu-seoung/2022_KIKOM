@@ -74,7 +74,7 @@
                 tools:ignore="MissingConstraints" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/go_board_writing_page_btn"
                 android:layout_width="80dip"
                 android:layout_height="55dip"
                 android:backgroundTint="@color/black"

@@ -21,9 +21,10 @@
         </activity>
         <activity android:name=".go_chatting_page"/>
         <activity android:name=".go_board_page"/>
-        <activity android:name="go_board_twice"/>
-        <activity android:name="go_lutin_recommend"/>
+        <activity android:name=".go_board_twice"/>
+        <activity android:name=".go_lutin_recommend"/>
         <activity android:name=".go_exercise_page"/>
+        <activity android:name=".go_board_writing_page"/>
     </application>
 
 </manifest>

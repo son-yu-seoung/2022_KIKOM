@@ -53,6 +53,16 @@ public class go_board_twice extends AppCompatActivity {
 
         });
 
+        Button go_board_writing_page_btn = (Button) findViewById(R.id.go_board_writing_page_btn);
+        go_board_writing_page_btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), go_board_writing_page.class);
+                startActivity(intent);
+            }
+
+        });
 
 
     }
