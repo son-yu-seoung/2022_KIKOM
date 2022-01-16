@@ -30,13 +30,13 @@ while True:
         print('\n==================== 데이터 확인 ====================\n')
         
         while True:
-            select = int(input('0. 데이터 전체 확인, 1. 검색해서 하나만 확인, 2. 종료'))
+            select = int(input('0. 데이터 전체 확인, 1. 검색해서 하나만 확인, 2. 종료 : '))
             
             if select == 0:
                 print(excersize_df)
             elif select == 1:
-                target_name = str(input('검색할 사람의 이름을 입력해주세요'))
-                print(excersize_df.index[excersize_df['Name'] == target_name])
+                target_name = str(input('검색할 사람의 이름을 입력해주세요\n'))
+                print(excersize_df.loc[excersize_df['Name'] == target_name])
             elif select == 2:
                 print('종료하겠습니다.\n')
                 time.sleep(2)
@@ -56,12 +56,13 @@ while True:
             excersize_df = excersize_df.append(insert_dict, ignore_index=True)
             excersize_df.to_csv('./excersize_info.csv')
         
-        except:
-            print("\n예외 발생 (data type)")
+        except Exception as e: 
+            print('예외가 발생했습니다.', e)
+    
 
     elif select == 2: # data retouch
         print('\n==================== 데이터 수정 ====================\n')
-        target_name = str(input('수정할 사람의 이름을 입력해주세요'))
+        target_name = str(input('수정할 사람의 이름을 입력해주세요\n'))
         target_location = excersize_df.index[excersize_df['Name'] == target_name]
         target_location = target_location.tolist()
         target_location = target_location[0]
@@ -69,7 +70,7 @@ while True:
         try:
             while True:
                 print('\n============== 수정할 부위을 입력해주세요 ==============\n')
-                body_select = int(input('0. Arm, 1. Leg, 2. Neck, 3. Finger, 4. Foot, 5. Eyes, 6. Ears, 7. Noise, 8. 종료'))
+                body_select = int(input('0. Arm, 1. Leg, 2. Neck, 3. Finger, 4. Foot, 5. Eyes, 6. Ears, 7. Noise, 8. 종료 : '))
                 
             
                 if body_select == 0:
