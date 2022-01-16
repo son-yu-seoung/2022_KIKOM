@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="410dip"
+            android:layout_height="match_parent"
             android:layout_weight="4"
             android:orientation="vertical">
 
@@ -117,8 +117,8 @@
                     android:textColor="@color/black"></TextView>
 
                 <ImageButton
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="#D8D8D8"
                     android:src="@drawable/pencilicon5">
 
@@ -137,6 +137,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:background="#D8D8D8">
+
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -218,6 +220,11 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.3"></LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="7"
                     android:orientation="vertical">
 
@@ -237,8 +244,13 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="0.1"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.3"
-                        android:background="@drawable/stroke"
+
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -249,12 +261,17 @@
 
                         <Button
                             android:id="@+id/go_lutin_recommend_btn"
-                            android:layout_width="100dp"
-                            android:layout_height="50dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="#d8d8d8"
                             android:text="루틴 설정"></Button>
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="#D8D8D8"></LinearLayout>
 
                     </LinearLayout>
 
@@ -264,9 +281,23 @@
                         android:layout_weight="0.5"
                         android:background="#D8D8D8"></LinearLayout>
 
+
+
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"></LinearLayout>
+
             </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -294,23 +325,24 @@
 
                 <Button
                     android:id="@+id/go_exercise_page_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="70dp"
-                    android:background="#000">
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="운동">
                 </Button>
 
                 <Button
                     android:id="@+id/go_chatting_page_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="70dp"
-                    android:background="#000"></Button>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="게시판">
+                </Button>
 
                 <Button
                     android:id="@+id/go_ranking_page_btn"
-                    android:layout_width="30dp"
-                    android:layout_height="70dp"
-                    android:background="#000"></Button>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="랭킹">
+                </Button>
 
             </LinearLayout>
 

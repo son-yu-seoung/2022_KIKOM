@@ -96,6 +96,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button go_exercise_page_btn = (Button) findViewById(R.id.go_exercise_page_btn);
+        go_exercise_page_btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), go_exercise_page.class);
+                startActivity(intent);
+            }
+        });
+
         // Button 전환
 
 /*

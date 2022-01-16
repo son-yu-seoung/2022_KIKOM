@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints">
 
@@ -273,22 +273,24 @@
                 android:layout_weight="2">
 
                 <Button
-                    android:layout_width="30dp"
-                    android:layout_height="70dp"
-                    android:background="#000">
-
+                    android:id="@+id/go_exercise_page_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="운동">
                 </Button>
 
                 <Button
-                    android:layout_width="30dp"
-                    android:layout_height="70dp"
-                    android:background="#000">
+                    android:id="@+id/go_chatting_page_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="게시판">
                 </Button>
 
                 <Button
-                    android:layout_width="30dp"
-                    android:layout_height="70dp"
-                    android:background="#000">
+                    android:id="@+id/go_ranking_page_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="랭킹">
                 </Button>
 
             </LinearLayout>
