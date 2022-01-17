@@ -49,9 +49,8 @@ public class go_board_page extends AppCompatActivity {
             }
         });
 
-        /*  Home Button
         ImageButton go_home_btn = (ImageButton) findViewById(R.id.go_home_btn);
-        go_exercise_page_btn.setOnClickListener(new View.OnClickListener() {
+        go_home_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -59,6 +58,5 @@ public class go_board_page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-         */
     }
 }
