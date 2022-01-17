@@ -28,5 +28,16 @@ public class go_chatting_page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button go_exercise_page_btn = (Button) findViewById(R.id.go_exercise_page_btn);
+        go_exercise_page_btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), go_exercise_page.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

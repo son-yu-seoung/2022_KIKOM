@@ -283,7 +283,8 @@
                     android:id="@+id/go_chatting_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="게시판">
+                    android:text="게시판"
+                    tools:ignore="DuplicateIds">
                 </Button>
 
                 <Button
