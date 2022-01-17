@@ -323,26 +323,29 @@
                 android:layout_weight="2"
                 android:orientation="vertical">
 
-                <Button
+                <ImageButton
                     android:id="@+id/go_exercise_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="운동">
-                </Button>
+                    android:src="@drawable/exercise_btn"
+                    android:background="@android:color/transparent">
+                </ImageButton>
 
-                <Button
+                <ImageButton
                     android:id="@+id/go_chatting_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="게시판">
-                </Button>
+                    android:src="@drawable/board_btn"
+                    android:background="@android:color/transparent">
+                </ImageButton>
 
-                <Button
+                <ImageButton
                     android:id="@+id/go_ranking_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="랭킹">
-                </Button>
+                    android:src="@drawable/rank_btn"
+                    android:background="@android:color/transparent">
+                </ImageButton>
 
             </LinearLayout>
 

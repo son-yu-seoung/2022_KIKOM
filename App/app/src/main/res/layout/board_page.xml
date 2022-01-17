@@ -15,7 +15,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.5">
+            android:layout_weight="0.1"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -167,12 +176,13 @@
                             android:layout_weight="90">
                         </LinearLayout>
 
-                        <Button
+                        <ImageButton
                             android:id="@+id/go_board_twice_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:src="@drawable/full_screen"
                             android:layout_weight="1">
-                        </Button>
+                        </ImageButton>
 
                     </LinearLayout>
 
@@ -263,7 +273,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5">
+                android:layout_weight="1">
             </TextView>
 
             <LinearLayout
@@ -272,27 +282,36 @@
                 android:orientation="vertical"
                 android:layout_weight="2">
 
-                <Button
+                <ImageButton
+                    android:id="@+id/go_home_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/home_btn"
+                    android:background="@android:color/transparent"/>
+
+                <ImageButton
                     android:id="@+id/go_exercise_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="운동">
-                </Button>
+                    android:src="@drawable/exercise_btn"
+                    android:background="@android:color/transparent">
+                </ImageButton>
 
-                <Button
+                <ImageButton
                     android:id="@+id/go_chatting_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="게시판"
-                    tools:ignore="DuplicateIds">
-                </Button>
+                    android:src="@drawable/board_btn"
+                    android:background="@android:color/transparent">
+                </ImageButton>
 
-                <Button
+                <ImageButton
                     android:id="@+id/go_ranking_page_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="랭킹">
-                </Button>
+                    android:src="@drawable/rank_btn"
+                    android:background="@android:color/transparent">
+                </ImageButton>
 
             </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.example.app;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     // Spinner End
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); // -> 가로로 화면 전환
         setContentView(R.layout.activity_main);
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Button 전환
 
-        Button go_chatting_page_btn = (Button) findViewById(R.id.go_chatting_page_btn);
+        ImageButton go_chatting_page_btn = (ImageButton) findViewById(R.id.go_chatting_page_btn);
         go_chatting_page_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button go_exercise_page_btn = (Button) findViewById(R.id.go_exercise_page_btn);
+        ImageButton go_exercise_page_btn = (ImageButton) findViewById(R.id.go_exercise_page_btn);
         go_exercise_page_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
