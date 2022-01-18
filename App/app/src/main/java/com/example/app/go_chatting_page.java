@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,7 @@ public class go_chatting_page extends AppCompatActivity {
             }
         });
 
-        Button go_exercise_page_btn = (Button) findViewById(R.id.go_exercise_page_btn);
+        ImageButton go_exercise_page_btn = (ImageButton) findViewById(R.id.go_exercise_page_btn);
         go_exercise_page_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
