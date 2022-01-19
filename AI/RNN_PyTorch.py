@@ -34,13 +34,13 @@ def make_batch(sentences):
         input = [word_dict[n] for n in word[:-1]] # 앞의 두 단어
         target = word_dict[word[-1]] # 뒤의 한 단어
 
-        input_batch.append(np.eye(n_class)[input]) # One-Hot Encoding 
+        input_batch.append(np.eye(n_class)[input]) # One-Hot Encoding, n_class * n_class 배열 
         target_batch.append(target)
 
     return input_batch, target_batch
 
 input_batch, target_batch = make_batch(sentences)
-input_batch = torch.tensor(input_batch, dtype=torch.float32, requires_grad=True)
+input_batch = torch.tensor(input_batch, dtype=torch.float32, requires_grad=True) # PyTorch에서는 텐서를 사용하여 모델의 입 출력뿐만 아니라 모델의 매개변수를 encode함
 target_batch = torch.tensor(target_batch, dtype=torch.int64)
 
 # TextRNN
