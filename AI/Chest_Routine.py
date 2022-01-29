@@ -1,3 +1,4 @@
+from unittest.util import _MAX_LENGTH
 import pandas as pd
 import numpy as np
 
@@ -13,7 +14,7 @@ from sklearn.model_selection import train_test_split
 from Hparams import *
 
 # 버전 : 2022-01-29
-# notion : 이것은 원래 계획의 down version
+# notion : 현재 trani set에 대해서도 정확히 예측 못함 문제 원인 찾기 (data 수, 숫자 예측의 허점 등)
 
 class Chest_Routine:
     def __init__(self):
@@ -23,7 +24,7 @@ class Chest_Routine:
         self.vocab_size = Hparams_Chest_Routine['vocab_size']
         self.embedding_dim = Hparams_Chest_Routine['embedding_dim']
 
-        self.epoch = Hparams_Chest_Routine['epochs']
+        self.epochs = Hparams_Chest_Routine['epochs']
         self.loss = Hparams_Chest_Routine['loss']
         self.optimizer = Hparams_Chest_Routine['optimizer']
         
@@ -48,7 +49,8 @@ class Chest_Routine:
             data_user.append(temp) # (n, 7)
 
         for i in range(len(df_routine)): # not clean
-            data_routine.append(str(df_routine.iloc[i]['운동1'])+' '+ 
+            data_routine.append('시작' + ' ' + # input에 시작 추가
+                        str(df_routine.iloc[i]['운동1'])+' '+ 
                         str(df_routine.iloc[i]['운동2'])+' '+
                         str(df_routine.iloc[i]['운동3'])+' '+
                         str(df_routine.iloc[i]['운동4'])+' '+
@@ -60,23 +62,39 @@ class Chest_Routine:
         return data_user, data_routine
 
     def pre_processing(self, data_user, data_routine):
-        tokenizer = Tokenizer()
-        tokenizer.fit_on_texts(data_routine)
-        data_routine = tokenizer.texts_to_sequences(data_routine)
+        self.tokenizer = Tokenizer()
+        self.tokenizer.fit_on_texts(data_routine)
+        self.tokenizer.fit_on_texts(['종료'])
+        input = self.tokenizer.texts_to_sequences(data_routine)
 
-        sequences = list()
-        for i in range(0, len(data_routine)):
-            for j in range(1, len(data_routine[i])):
-                if len(data_routine[i]) > 1:
-                    sequence = data_routine[i][j-1:j+1]
-                    sequences.append(sequence)
+        # 내가 직접 코딩하기 
+        target = list()
 
-        sequences = np.array(sequences)
+        for seq in input:
+            temp = list()
 
-        train_x_routine, train_y_routine = sequences[:,0], sequences[:,1]
-        train_y_routine = to_categorical(train_y_routine, num_classes=self.vocab_size)
+            for i in range(self.max_length):
+                if i == self.max_length - 1:
+                    temp.append(15)
+                else:
+                    temp.append(seq[i+1])
 
-        self.train_x_routine, self.test_x_routine, self.train_y_routine, self.test_y_routine = train_test_split(train_x_routine, train_y_routine, test_size=0.2, random_state=777)
+            target.append(temp)
+
+        print(input)
+        print(target)
+         
+        # train_x_routine, train_y_routine = sequences[:,0], sequences[:,1]
+        
+        # print(train_x_routine)
+        # print(train_y_routine) 
+        # train_y_routine = to_categorical(train_y_routine, num_classes=self.vocab_size)
+ 
+
+        train_x_routine, test_x_routine, train_y_routine, test_y_routine = train_test_split(input, target, shuffle=True, test_size=0.2)
+        self.train_x_routine, self.test_x_routine, self.train_y_routine, self.test_y_routine = np.array(train_x_routine), np.array(test_x_routine), np.array(train_y_routine), np.array(test_y_routine)
+        print(len(self.train_x_routine))
+        print(len(self.test_x_routine))
 
         return 0
 
@@ -84,21 +102,26 @@ class Chest_Routine:
         model = Sequential()
 
         model.add(Embedding(self.vocab_size, self.embedding_dim, input_length=1)) # 
-        model.add(LSTM(10)) # 
-        model.add(Dense(self.vocab_size, activation='softmax'))
+        model.add(LSTM(32, input_shape=(6,1))) # LSTM(20, input_shape=(12,1)) time step, feature
+        model.add(Dense(1, activation='relu')) # 각각 1개씩
 
-        model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        model.compile(loss=self.loss, optimizer=self.optimizer, metrics=['accuracy'])
         model.summary()
 
         return model
 
     def train(self):
         model = self.model()
+        # predict 설정해야함 
+        for i in range(self.epochs):
+            print(f'{i+1} Epochs..')
+            for j in range(len(self.train_x_routine)):
+                model.train_on_batch(self.train_x_routine[j], self.train_y_routine[j])
 
-        model.fit(self.train_x_routine, self.train_y_routine, epochs=10, verbose=2)
-        pred = model.predict(self.test_x_routine)
-
-        print(pred)
+        for i in range(len(self.test_x_routine)):
+            pred = np.round(model.predict(self.train_x_routine[i]))
+            print('정답 :', self.train_y_routine[i])
+            print(f'예측 : {pred[0]} {pred[1]} {pred[2]} {pred[3]} {pred[4]} {pred[5]}') 
 
         return 0 
             
