@@ -1,21 +1,18 @@
 import pandas as pd
 import os, time
 
-if not os.path.exists('./excersize_info.csv'): # initialize
+if not os.path.exists('../dataset/가슴/data_x_1.csv'): # initialize
     excersize_df = pd.DataFrame({
-        'Name' : 'admin',
-        'Arm' : 0,
-        'Leg' : 0,
-        'Neck' : 0,
-        'Finger' : 0,
-        'Foot' : 0,
-        'Eyes' : 0,
-        'Ears' : 0,
-        'Noise' : 0
+        '운동 개수' : 3,
+        '수준' : 2,
+        '기구 유무' : 0,
+        '근성장' : 1,
+        '벌크업' : 0,
+        '다이어트' : 0
     }, index=['0'])
-    excersize_df.to_csv('./excersize_info.csv')
+    excersize_df.to_csv('../dataset/가슴/data_x_1.csv')
 
-excersize_df = pd.read_csv('./excersize_info.csv', index_col = 0)
+excersize_df = pd.read_csv('../dataset/가슴/data_x_1.csv', index_col = 0)
 
 while True:
     time.sleep(2) # rest time
