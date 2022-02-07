@@ -56,9 +56,6 @@ class Chest_Routine:
                         str(df_routine.iloc[i]['운동4'])+' '+
                         str(df_routine.iloc[i]['운동5']))
 
-        print('data_x', data_user)
-        print('data_y', data_routine)
-
         return data_user, data_routine
 
     def pre_processing(self, data_user, data_routine):
@@ -66,6 +63,8 @@ class Chest_Routine:
         self.tokenizer.fit_on_texts(data_routine)
         self.tokenizer.fit_on_texts(['종료'])
         input = self.tokenizer.texts_to_sequences(data_routine)
+
+        print(self.tokenizer.index_word)
 
         # 내가 직접 코딩하기 
         target = list()
@@ -80,16 +79,12 @@ class Chest_Routine:
                     temp.append(seq[i+1])
 
             target.append(temp)
-
-        print(input)
-        print(target)
          
         # train_x_routine, train_y_routine = sequences[:,0], sequences[:,1]
         
-        # print(train_x_routine)
+        # print(train_x_routine) 
         # print(train_y_routine) 
         # train_y_routine = to_categorical(train_y_routine, num_classes=self.vocab_size)
- 
 
         train_x_routine, test_x_routine, train_y_routine, test_y_routine = train_test_split(input, target, shuffle=True, test_size=0.2)
         self.train_x_routine, self.test_x_routine, self.train_y_routine, self.test_y_routine = np.array(train_x_routine), np.array(test_x_routine), np.array(train_y_routine), np.array(test_y_routine)
@@ -103,7 +98,7 @@ class Chest_Routine:
 
         model.add(Embedding(self.vocab_size, self.embedding_dim, input_length=1)) # 
         model.add(LSTM(32, input_shape=(6,1))) # LSTM(20, input_shape=(12,1)) time step, feature
-        model.add(Dense(1, activation='relu')) # 각각 1개씩
+        model.add(Dense(1)) # 각각 1개씩
 
         model.compile(loss=self.loss, optimizer=self.optimizer, metrics=['accuracy'])
         model.summary()
