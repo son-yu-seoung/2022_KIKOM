@@ -1,0 +1,104 @@
+from turtle import clear
+import pandas as pd
+
+
+
+class Routine:
+    def __init__(self):
+        self.first_part = 0
+        self.second_part = 0
+        self.third_part = 0
+        self.part = ['등', '다리','허리', '손목']
+        self.body = ['대흉근', '승모근', '광배근', '견갑근', '전거근']
+        self.arm = ['이두근', ' 삼두근', '전완근', '상완근']
+        self.leg = ['허벅지', '대둔근', '햄스트링', '종아리']
+        self.waist = ['척추기립근','광배근']
+        self.A = ['1순위', '2순위', '3순위']
+        
+        
+    def enter_part(self):
+        # choice = int(input('원하는 부위를 팔등 부위로 입력하실려면 1을 입력하시고 근육이름으로 입력하실거면 2를 입력해주세요'))
+        
+        # if choice == 1:
+        #     print('부위는 등, 다리, 허리, 손목 있습니다.')
+        #     self.first_part, self.second_part, self.third_part = map(str, input('위에 부위 중에 운동을 하고싶은 부위를 세개 입력해주세요').split())
+        # elif choice == 2:
+        #     self.first_part, self.second_part, self.third_part = map(str, input('운동을 하고싶은 근육이름를 세개 입력해주세요').split())
+        
+        
+        self.first_part, self.second_part, self.third_part = map(str, input('운동을 하고싶은 근육이름를 세개 입력해주세요\n').split())
+        
+    def exercizedata_load(self):
+        self.Data = pd.read_csv('./exersize.csv',encoding = 'CP949')
+        self.exercize_data = self.Data['운동 명']
+        # print(self.Data)
+
+                
+    def first_Exercise_recommendation(self):
+        first_result = []
+        first_number = []
+        
+        for i in range(len(self.exercize_data)):
+            if self.Data.at[i, '1순위'] == self.first_part:
+                first_result.append(self.exercize_data[i])
+                first_number.append(i)
+        
+        if len(first_result) > 0:
+            print("###############  첫번째 입력하신 근육을 고려했을때 추천되는 운동 #################")
+            print(first_result)
+            
+            second_result, second_number = self.Exercise_recommendation(first_number, '2순위', self.second_part)
+            
+            if len(second_result) > 0:
+                print('###############  두번째 입력하신 근육까지 고려했을때 추천되는 운동 #################')
+                print(second_result)
+                third_exercise, third_number = self.Exercise_recommendation(second_number, '3순위', self.third_part)
+                
+                if len(third_exercise) > 0:
+                    print('###############  세번째 입력하신 근육까지 고려했을때 추천되는 운동 #################')
+                    print(third_exercise)
+                
+                else:
+                    print('################# 세번째 입력하신 운동까지 한번에 늘어나는 운동이 없습니다 #################')
+                
+                
+            else:
+                print('##### 두번째 입력하신 운동까지 한번에 늘어나는 운동이 없어서 세번째 입력하신 운동을 고려해보겠습니다. #####')
+                third_exercise, third_number = self.Exercise_recommendation(first_number, '3순위', self.third_part)
+                
+                if len(third_exercise) > 0:
+                    print('###############  세번째 입력하신 근육을 고려했을때 추천되는 운동 #################')
+                    print(third_exercise)
+                    
+                else:
+                    print("##### 세번쨰 입력하신 근육까지 한번에 늘어나는 운동이 없습니다. #####")
+        
+        else:
+            print("##### 첫번째 입력하신 근육을 늘리는 운동이 없습니다. #####")
+            
+             
+        
+        
+        
+    def Exercise_recommendation(self,previous_number,considerations, muscle):
+        result = []
+        number = []
+        
+        for k in previous_number:
+            if self.Data.at[k, considerations] == muscle:
+                result.append(self.exercize_data[k])
+                number.append(k)
+        
+        return result, number
+            
+                        
+                
+    def start(self):
+        self.exercizedata_load()
+        self.enter_part()
+        self.first_Exercise_recommendation()
+        # self.test()
+      
+        
+Routine_Recommendation = Routine()
+Routine_Recommendation.start()
