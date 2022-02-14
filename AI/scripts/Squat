@@ -23,11 +23,11 @@ class Squat:
         
     def Data_load(self):
         
-        Data = pd.read_csv('./bodyPerformance.csv')
+        Data = pd.read_csv('./inbody.csv')
 
         print(Data)
 
-        self.X_data = Data[['age', 'height_cm', 'weight_kg']]
+        self.X_data = Data[['height_cm', 'weight_kg','Skeletal','body_fat','BMI','body_fat_percentage','right_arm','left_arm','body','right_leg','left_leg']]
         self.Y_data = Data[['squat']]
 
     def Data_processing(self):
@@ -65,8 +65,11 @@ class Squat:
         early_stopping = EarlyStopping(monitor = self.monitor, min_delta = self.min_delta, patience = self.patience, verbose =1, mode = 'auto', baseline = None, restore_best_weights = True)
         history = model.fit(self.train_x, self.train_y, epochs = self.epochs, validation_split = self.validation_split, callbacks=(early_stopping))
 
-    def predict(self):
-        model = self.Model()
+        model.save('../3DB_model.h5')
+
+        return model
+
+    def predict(self, model):
         predict_check = model.predict(self.test_x)
 
         predict_check = self.scaler_y.inverse_transform(predict_check)
@@ -83,14 +86,14 @@ class Squat:
         self.patience = 50
         self.monitor = 'mse'
         self.metrics = ['accuracy']
-        self.epochs = 3000
+        self.epochs = 10
         self.validation_split = 0.25
         
     def start(self):
         self.Data_load()
         self.Data_processing()
-        self.train()
-        self.predict()
+        model = self.train()
+        self.predict(model)
         
 Sq = Squat()
 Sq.start()
