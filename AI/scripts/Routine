@@ -26,18 +26,18 @@ class Routine:
         # elif choice == 2:
         #     self.first_part, self.second_part, self.third_part = map(str, input('운동을 하고싶은 근육이름를 세개 입력해주세요').split())
         
-        self.first_part, self.second_part, self.third_part = map(str, input('운동을 하고싶은 근육이름를 세개 입력해주세요\n').split())
+        # self.first_part, self.second_part, self.third_part = map(str, input('운동을 하고싶은 근육이름를 세개 입력해주세요\n').split())
 
-        # self.first_part = '대흉근'
-        # self.second_part = '승모근'
-        # self.third_part = '능형근'
+        self.first_part = '승모근'
+        self.second_part = '광배근'
+        self.third_part = '이두근'
         
     def exercizedata_load(self):
         self.Data = pd.read_csv('./exersize.csv',encoding = 'CP949')
         self.exercize_data = self.Data['name']
 
         for k in self.exercize_data:
-            self.score[self.exercize_data[k]] = 0
+            self.score[k] = 0
         
         # for i in range(19):
         #     self.score[self.exercize_data[i]] = 0
@@ -57,23 +57,29 @@ class Routine:
         
         for i in range(len(self.exercize_data)):
             if self.Data.at[i, self.first_part] == 9:
-                first_result.append(self.exercize_data[i])
+                self.score[self.exercize_data[i]] += 3
+                first_number.append(i)
+            elif self.Data.at[i, self.first_part] == 5:
+                self.score[self.exercize_data[i]] += 2
+                first_number.append(i)
+            elif self.Data.at[i, self.first_part] == 3:
+                self.score[self.exercize_data[i]] += 1
                 first_number.append(i)
         
-        if len(first_result) > 0:
+        if len(first_number) > 0:
             print("###############  1순위 근육을 고려했을때 추천되는 운동 #################")
-            print(first_result)
+            print(self.score)
             
-            first_second_result, first_second_number = self.Exercise_recommendation(first_number, 5 ,self.second_part)
+            first_second_number = self.Exercise_recommendation(first_number,self.second_part)
             
-            if len(first_second_result) > 0:
+            if len(first_second_number) > 0:
                 print('###############  2순위 근육까지 고려했을때 추천되는 운동 #################')
-                print(first_second_result)
-                first_third_exercise, first_third_number = self.Exercise_recommendation(first_second_number, 3, self.third_part)
+                print(self.score)
+                first_third_number = self.Exercise_recommendation(first_second_number,self.third_part)
                 
-                if len(first_third_exercise) > 0:
+                if len(self.score) > 0:
                     print('###############  3순위 근육까지 고려했을때 추천되는 운동 #################')
-                    print(first_third_exercise)
+                    print(self.score)
                 
                 else:
                     print('################# 3순위 운동까지 한번에 늘어나는 운동이 없습니다 #################')
@@ -82,65 +88,64 @@ class Routine:
                 
             else:
                 print('##### 두번째 입력하신 운동까지 한번에 늘어나는 운동이 없어서 세번째 입력하신 운동을 고려해보겠습니다. #####')
-                first_third_exercise, first_third_number = self.Exercise_recommendation(first_number, 3, self.third_part)
+                first_third_number = self.Exercise_recommendation(first_number,self.third_part)
                 
-                if len(first_third_exercise) > 0:
+                if len(first_third_number) > 0:
                     print('###############  세번째 입력하신 근육을 고려했을때 추천되는 운동 #################')
-                    print(first_third_exercise)
+                    print(self.score)
                     
                 else:
                     print("##### 세번쨰 입력하신 근육까지 한번에 늘어나는 운동이 없습니다. #####")
 
-        else:
-            print("##### 근육을 잘못 입력하셨습니다. #####")
-
-
-        print('\n')
-        print('##### 1순위에없는 2순위 근육을 늘리는 운동으로 고려하겠습니다.')
-            
-        for i in range(len(self.exercize_data)):
-            if self.Data.at[i, self.second_part] == 5:
-                second_result.append(self.exercize_data[i])
-                second_number.append(i)
+        elif len(first_result) == 0:
+            print('\n')
+            print('##### 1순위를 우선적으로 고려하는 운동이 없습니다. #####')
+            print('##### 1순위에없는 2순위 근육을 늘리는 운동으로 고려하겠습니다.')
                 
-        for j in second_number:
-            for k in first_number:
-                if j == k:
-                    del_exercize = self.exercize_data[k]
-                    second_result.remove(del_exercize)
-                    second_number.remove(k)
+            for i in range(len(self.exercize_data)):
+                if self.Data.at[i, self.second_part] == 5:
+                    self.score[self.exercize_data[i]] += 2
+                    second_number.append(i)
+                    
+            for j in second_number:
+                for k in first_number:
+                    if j == k:
+                        del_exercize = self.exercize_data[k]
+                        print(del_exercize)
+                        del second_result[del_exercize]
+                        second_number.remove(k)
 
-        if len(second_result) > 0:
-            print("###############  2순위 근육을 고려했을때 추천되는 운동 #################")
-            print(second_result)
+            if len(second_result) > 0:
+                print("###############  2순위 근육을 고려했을때 추천되는 운동 #################")
+                print(second_result)
+                
+                second_second_number = self.Exercise_recommendation(second_number,self.third_part)
+
+                if len(second_second_number) > 0:
+                    print('###############  3순위 근육까지 고려했을때 추천되는 운동 #################')
+                    print(self.score)
+
+                else:
+                    print('같이 고려되는 운동이 없습니다.')
+
+            print('\n')
+            print('##### 1순위와 2순위에 없는 3순위 근육을 늘리는 운동으로 고려하겠습니다.')
+
+            for i in range(len(self.exercize_data)):
+                if self.Data.at[i, self.third_part] == 3:
+                    self.score[self.exercize_data[k]] += 1
+                    third_number.append(i)
             
-            second_second_result, second_second_number = self.Exercise_recommendation(second_number, 3 ,self.third_part)
+            print(self.score)
 
-            if len(second_second_result) > 0:
-                print('###############  3순위 근육까지 고려했을때 추천되는 운동 #################')
-                print(second_second_result)
+            for j in third_number:
+                for k in second_number:
+                    if j == k:
+                        del_exercize = self.exercize_data[k]
+                        del(third_result[del_exercize])
+                        third_number.remove(k)
 
-            else:
-                print('같이 고려되는 운동이 없습니다.')
-
-        print('\n')
-        print('##### 1순위와 2순위에 없는 3순위 근육을 늘리는 운동으로 고려하겠습니다.')
-
-        for i in range(len(self.exercize_data)):
-            if self.Data.at[i, self.third_part] == 3:
-                third_result.append(self.exercize_data[i])
-                third_number.append(i)
-        
-        print(third_result)
-
-        for j in third_number:
-            for k in second_number:
-                if j == k:
-                    del_exercize = self.exercize_data[k]
-                    third_result.remove(del_exercize)
-                    third_number.remove(k)
-
-        print(third_result)
+            print(self.score)
         
         
     def Exercise_recommendation(self,previous_number, muscle):
