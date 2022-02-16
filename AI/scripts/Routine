@@ -209,8 +209,7 @@ class Routine:
 
         
         
-        
-        
+       
         
 Routine_Recommendation = Routine()
 Routine_Recommendation.start()
